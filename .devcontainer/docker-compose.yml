@@ -1,0 +1,69 @@
+version: "3.9"
+services:
+  # jenkins:
+  #   build: 'jenkins'
+  #   restart: always
+  #   environment:
+  #     - DOCKER_HOST=tcp://docker:2376
+  #     - DOCKER_CERT_PATH=/certs/client
+  #     - DOCKER_TLS_VERIFY=1
+  #     - JENKINS_OPTS="--prefix=/jenkins"
+  #   ports:
+  #     - '50000:50000'
+  #   volumes:
+  #     - 'jenkins-data:/var/jenkins_home'
+  #     - 'jenkins-docker-certs:/certs/client:ro'
+  #   networks:
+  #     - jenkins
+  # docker:
+  #   image: 'docker:dind'
+  #   restart: always
+  #   privileged: true
+  #   command: ["--storage-driver", "overlay2"]
+  #   environment:
+  #     - DOCKER_TLS_CERTDIR=/certs
+  #   ports:
+  #     - '2376:2376'
+  #   volumes:
+  #     - 'jenkins-data:/var/jenkins_home'
+  #     - 'jenkins-docker-certs:/certs/client'
+  #   networks:
+  #     - jenkins
+  # nexus:
+  #   image: sonatype/nexus3
+  #   volumes:
+  #     - 'nexus-data:/nexus-data'
+  #   networks:
+  #     - jenkins
+  # nginx:
+  #   build: 
+  #     context: 'nginx/${SERVER_NAME}'
+  #     dockerfile: ../Dockerfile
+  #   restart: always
+  #   ports:
+  #     - '80:80'
+  #     - '443:443'
+  #   volumes:
+  #     - 'nginx-etc:/etc/nginx/conf.d'
+  #     - 'nginx-doc:/var/www/dev.hispzw.org/html'
+  #     - 'letsencrypt-etc:/etc/letsencrypt'
+  #     - 'letsencrypt-var:/var/lib/letsencrypt'
+  #     - 'letsencrypt-log:/var/log/letsencrypt'
+  #   networks:
+  #     - jenkins
+  drools-build:
+    build: 'drools-build'
+    volumes:
+      - "../..:/workspaces:cached"
+    command: sleep infinity
+# volumes:
+#   nginx-etc:
+#   nginx-doc:
+#   letsencrypt-etc:
+#   letsencrypt-var:
+#   letsencrypt-log:
+#   jenkins-data:
+#   jenkins-docker-certs:  
+#   nexus-data:
+# networks:
+#   jenkins: {}
