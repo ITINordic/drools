@@ -54,7 +54,7 @@ services:
   drools-build:
     build: 'drools-build'
     volumes:
-      - "..:/workspaces:cached"
+      - "..:/volume/drools:cached"
     command: sleep infinity
 # volumes:
 #   nginx-etc:

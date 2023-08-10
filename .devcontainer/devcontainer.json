@@ -4,7 +4,7 @@
 	"name": "Drools build",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "drools-build",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"workspaceFolder": "/volume/drools",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
