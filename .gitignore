@@ -7,6 +7,7 @@ local/
 !.github
 !.git-blame-ignore-revs
 !.openrewrite
+!.devcontainer
 nbproject
 *.ipr
 *.iws
