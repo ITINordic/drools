@@ -19,6 +19,7 @@ import java.io.InputStream;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.apache.xerces.jaxp.SAXParserFactoryImpl;
 
 import org.kie.api.builder.ReleaseId;
 import org.xml.sax.Attributes;
@@ -49,7 +50,7 @@ public class MinimalPomParser extends DefaultHandler {
     public static PomModel parse(String path, InputStream is) {
         MinimalPomParser handler = new MinimalPomParser();
         try {
-            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParserFactory factory = new SAXParserFactoryImpl();
             //https://rules.sonarsource.com/java/RSPEC-2755
             factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
             factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);

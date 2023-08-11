@@ -299,5 +299,12 @@
       </modules>
     </profile>
   </profiles>
-
+  <distributionManagement>
+    <repository>
+      <id>internal.repo</id>
+      <name>Hisp Zimbabwe</name>
+      <url>https://dev.hispzw.org/repository/hispzw/</url>
+      <!-- <url>http://10.0.0.193:8081/repository/hispzw/</url> -->
+    </repository>
+  </distributionManagement>
 </project>
