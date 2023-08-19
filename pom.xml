@@ -40,9 +40,10 @@
            Artifacts with release (fixed) versions are being downloaded primarily from there. Without the central being the
            first repository the JBoss.org Nexus would be contacted first and since it is quite slow it slows down the build.
            We use JBoss.org repo only to download our SNAPSHOTs. -->
-      <id>central</id>
+      <id>internal.central</id>
       <name>Central Repository</name>
-      <url>https://repo.maven.apache.org/maven2</url>
+      <!-- <url>https://repo.maven.apache.org/maven2</url> -->
+      <url>https://local.test/nexus/repository/maven-central/</url>
       <layout>default</layout>
       <snapshots>
         <enabled>false</enabled>
@@ -72,9 +73,10 @@
            Artifacts with release (fixed) versions are being downloaded primarily from there. Without the central being the
            first repository the JBoss.org Nexus would be contacted first and since it is quite slow it slows down the build.
            We use JBoss.org repo only to download our SNAPSHOTs. -->
-      <id>central</id>
+      <id>internal.central</id>
       <name>Central Repository</name>
-      <url>https://repo.maven.apache.org/maven2</url>
+      <!-- <url>https://repo.maven.apache.org/maven2</url> -->
+      <url>https://local.test/nexus/repository/maven-central/</url>
       <layout>default</layout>
       <snapshots>
         <enabled>false</enabled>
@@ -303,8 +305,8 @@
     <repository>
       <id>internal.repo</id>
       <name>Hisp Zimbabwe</name>
-      <url>https://dev.hispzw.org/repository/hispzw/</url>
-      <!-- <url>http://10.0.0.193:8081/repository/hispzw/</url> -->
+      <!-- <url>https://dev.hispzw.org/repository/hispzw/</url> -->
+      <url>https://local.test/nexus/repository/hispzw/</url>
     </repository>
   </distributionManagement>
 </project>

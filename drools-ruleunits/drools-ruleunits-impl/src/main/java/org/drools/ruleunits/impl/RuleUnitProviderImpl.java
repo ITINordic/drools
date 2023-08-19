@@ -125,8 +125,17 @@ public class RuleUnitProviderImpl implements RuleUnitProvider {
         Collection<Resource> resources = new HashSet<>();
         try {
             Enumeration<URL> urlEnumeration = unitClass.getClassLoader().getResources(unitClass.getPackageName().replace('.', '/'));
-            while (urlEnumeration.hasMoreElements()) {
-                URL resourceUrl = urlEnumeration.nextElement();
+            Enumeration<URL> indexEnumeration = unitClass.getClassLoader().getResources(unitClass.getPackageName().replace('.', '/') + "/index");
+            while (urlEnumeration.hasMoreElements() || indexEnumeration.hasMoreElements()) {
+                URL resourceUrl;
+                if(urlEnumeration.hasMoreElements()) {
+                    resourceUrl = urlEnumeration.nextElement();
+                } else if(indexEnumeration.hasMoreElements()) {
+                    resourceUrl = indexEnumeration.nextElement();
+                } else {
+                    resourceUrl = null;
+                }
+
                 String protocol = resourceUrl.getProtocol();
                 switch (protocol) {
                     case "file":
@@ -185,6 +194,12 @@ public class RuleUnitProviderImpl implements RuleUnitProvider {
         String path = resourceUrl.getPath();                       // file:/path/to/xxx.jar!org/example
 
         int jarSuffixIndex = path.indexOf(".jar!/");
+        if(jarSuffixIndex == -1) {
+            jarSuffixIndex = path.indexOf(".apk!/");
+            if(jarSuffixIndex != -1) {
+                path = path.substring(0, path.length() - 6);
+            }
+        }
         String jarPath = path.substring(5, jarSuffixIndex + 4);    // /path/to/xxx.jar
         String directoryPath = path.substring(jarSuffixIndex + 6); // org/example
 

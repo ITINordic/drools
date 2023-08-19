@@ -22,6 +22,8 @@ EOF
 
 ENCRYPT_REPO_PASSWORD="$(mvn --encrypt-password "$REPO_PASSWORD")"
 
+function add_server_auth {
+  
 SETTINGS_FILE="$HOME/.m2/settings.xml"
 if [ -f "$SETTINGS_FILE" ]; then
     awk -v name="$REPO_USER" -v password="$ENCRYPT_REPO_PASSWORD" 'BEGIN {notdone=1; printserver=1}
@@ -32,6 +34,11 @@ if [ -f "$SETTINGS_FILE" ]; then
         if(printserver)print("<servers>");
         print("    <server>");
         print("      <id>internal.repo</id>");
+        print("      <username>" name "</username>")
+        print("      <password>" password "</password>");
+        print("    </server>");
+        print("    <server>");
+        print("      <id>internal.central</id>");
         print("      <username>" name "</username>")
         print("      <password>" password "</password>");
         print("    </server>");
@@ -46,6 +53,11 @@ tee <<EOF > $SETTINGS_FILE
   <servers>
     <server>
       <id>internal.repo</id>
+      <username>$REPO_USER</username>
+      <password>$ENCRYPT_REPO_PASSWORD</password>
+    </server>
+    <server>
+      <id>internal.central</id>
       <username>$REPO_USER</username>
       <password>$ENCRYPT_REPO_PASSWORD</password>
     </server>
